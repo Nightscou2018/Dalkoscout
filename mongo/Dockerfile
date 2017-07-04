@@ -30,9 +30,11 @@ RUN install -o mongodb -g mongodb -d /var/log/mongodb/ && \
 
 # Installing config scripts
 ADD mongodb.conf .
+ADD mongod-start.sh .
+RUN sudo chmod +x mongod-start.sh
 RUN install mongodb.conf /etc
 
 VOLUME /data/db
 
 EXPOSE 27017
-CMD ["/opt/mongodb/bin/mongod"]
+CMD ["./mongod-start.sh"]

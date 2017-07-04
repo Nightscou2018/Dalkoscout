@@ -1,8 +1,8 @@
-nightscout:
-  image: d4lk0s/dalkoscout:0.9.2
+dalkoscout:
+  image: d4lk0s/dalkoscout
   environment:
     TZ: America/New_York
-    MONGO_CONNECTION: mongodb://mongo:27017/dalkoscout
+    MONGO_CONNECTION: mongodb://mongo:27017/nightscout
     # Require Password (API_SECRET) in Dalkoscout Portal
     AUTH_DEFAULT_ROLES: denied
     API_SECRET: dalkoscout
@@ -20,7 +20,6 @@ nightscout:
     # SSL Settings
     SSL_KEY: /var/opt/ssl/privkey.pem
     SSL_CERT: /var/opt/ssl/fullchain.pem
-    
   ports:
     - "1337:1337"
   links:
@@ -29,6 +28,6 @@ nightscout:
     - /home/pi/docker/dalkoscout:/var/opt/ssl/:ro
   restart: unless-stopped
 mongo:
-  image: dhermanns/rpi-mongo:2.6.4
-  command: "/opt/mongodb/bin/mongod"
+  build: ./dalkoscout-mongo
+  command: "./mongod-start.sh"
   restart: unless-stopped

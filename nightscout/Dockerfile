@@ -21,6 +21,7 @@ RUN useradd --system -ms /bin/bash node && \
 
 USER node
 ENV HOME /home/node
+ENV CUSTOM_TITLE Dalkoscout
 WORKDIR /home/node/app
 
 # install the application
